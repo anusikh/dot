@@ -44,5 +44,5 @@ then
 end
 
 require("options")
-require("lsp_config")
-require("dap_config")
+require("lsp")
+require("ndap")
