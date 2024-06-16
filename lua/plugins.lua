@@ -5,7 +5,7 @@ local keyset = vim.keymap.set
 if pcall(require, 'trouble') then require('trouble').setup() end
 
 -- for Comment
-if pcall(require, 'Comment') then require('Comment').setup() end
+if pcall(require, 'comment') then require('comment').setup() end
 
 -- for nerdtree
 keyset('n', '<leader>n', ':NERDTreeFocus<CR>', { noremap = true })

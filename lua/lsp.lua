@@ -2,16 +2,12 @@ local vim = vim
 
 -- for mason
 if pcall(require, 'mason') then require('mason').setup() end
-require('mason-lspconfig').setup({
-  ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "jdtls" }
-})
+local cmp = require('cmp')
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -34,8 +30,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- Set up nvim-cmp. (referred from official README)
-local cmp = require('cmp')
-
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),

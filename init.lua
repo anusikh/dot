@@ -11,7 +11,6 @@ Plug('folke/trouble.nvim')
 Plug('mfussenegger/nvim-dap')
 -- plugins for lsp and autocomplete
 Plug('williamboman/mason.nvim')
-Plug('williamboman/mason-lspconfig.nvim')
 Plug('neovim/nvim-lspconfig')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/nvim-cmp')
