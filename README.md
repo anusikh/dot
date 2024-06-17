@@ -19,3 +19,5 @@
 - ftplugin is a special folder that store fileType based config, lsp should have single file mode for this to work
 - find and replace globally: <C-r> (telescope), then search, then <C-q> (quicklist), then `:cdo s/<bef>/<after>/gc`
 - find and replace in current file: `:%s/<bef>/<after>`
+
+- kotlin lsp sucks ass! 
