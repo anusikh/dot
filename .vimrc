@@ -49,6 +49,7 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'puremourning/vimspector'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
