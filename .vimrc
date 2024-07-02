@@ -4,6 +4,14 @@
 " install lang servers -> :CocInstall coc-java coc-json coc-tsserver coc-rust-analyzer
 " install debuggers -> :VimspectorInstall CodeLLDB
 
+" for java lombok support add this in coc config
+" {
+"   "java.jdt.ls.vmargs": "-javaagent:/home/anusikh/Downloads/lombok-1.18.28.jar",
+"   "java.jdt.ls.lombokSupport.enabled": true,
+"   "java.trace.server": "verbose",
+"   "java.jdt.ls.java.home": "/home/anusikh/.jvem/java"
+" }
+
 " a sample .vimspector.json file for rust debugging
 " {
 "   "$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json",
@@ -45,11 +53,13 @@ call plug#begin()
 
 Plug 'tpope/vim-sensible'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-java'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'puremourning/vimspector'
 Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
