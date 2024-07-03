@@ -48,7 +48,8 @@ set mouse=a
 set updatetime=300
 set signcolumn=yes
 set autoindent expandtab tabstop=2 shiftwidth=2
-set clipboard=unnamed
+set clipboard=unnamedplus
+" set clipboard=unnamed for mac
 
 call plug#begin()
 
