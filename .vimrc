@@ -3,7 +3,8 @@
 " source and run :PlugInstall to install all plugins
 " install lang servers -> :CocInstall coc-java coc-json coc-tsserver coc-rust-analyzer
 " install debuggers -> :VimspectorInstall CodeLLDB
-
+" for quickfix: open rg search, press tab on the item you want to add to quickfix and then press enter
+ 
 " for java lombok support add this in coc config
 " {
 "   "java.jdt.ls.vmargs": "-javaagent:/home/anusikh/Downloads/lombok-1.18.28.jar",
@@ -47,7 +48,7 @@ set mouse=a
 set updatetime=300
 set signcolumn=yes
 set autoindent expandtab tabstop=2 shiftwidth=2
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 call plug#begin()
 
