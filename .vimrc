@@ -4,7 +4,6 @@
 " install lang servers -> :CocInstall coc-java coc-json coc-tsserver coc-rust-analyzer
 " install debuggers -> :VimspectorInstall CodeLLDB
 " for quickfix: open rg search, press tab on the item you want to add to quickfix and then press enter
-" to scroll in vim terminal: c+w and N
  
 " for java lombok support add this in coc config
 " {
@@ -49,14 +48,12 @@ set mouse=a
 set updatetime=300
 set signcolumn=yes
 set autoindent expandtab tabstop=2 shiftwidth=2
-set clipboard=unnamedplus
-" set clipboard=unnamed for mac
+set clipboard=unnamed
 
 call plug#begin()
 
 Plug 'tpope/vim-sensible'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-java'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
