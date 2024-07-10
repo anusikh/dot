@@ -1,7 +1,7 @@
 " STEPS
 " pre-req: vim-plug, ripgrep
 " source and run :PlugInstall to install all plugins
-" install lang servers -> :CocInstall coc-java coc-json coc-tsserver coc-rust-analyzer
+" install lang servers -> :CocInstall coc-java coc-json coc-tsserver coc-rust-analyzer coc-java-debug
 " install debuggers -> :VimspectorInstall CodeLLDB
 " for quickfix: open rg search, press tab on the item you want to add to quickfix and then press enter
  
@@ -38,6 +38,35 @@
 "     }
 "   }
 " }
+
+" a sample .vimspector.json file for java debugging
+" {
+"   "adapters": {
+"     "java-debug-server": {
+"       "name": "vscode-java",
+"       "port": "${AdapterPort}"
+"     }
+"   },
+"   "configurations": {
+"     "Java Attach": {
+"       "default": true,
+"       "adapter": "java-debug-server",
+"       "configuration": {
+"         "request": "attach",
+"         "host": "127.0.0.1",
+"         "port": "5005"
+"       },
+"       "breakpoints": {
+"         "exception": {
+"           "caught": "N",
+"           "uncaught": "N"
+"         }
+"       }
+"     }
+"   }
+" }
+" first run the jar of a java application with command: java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 ./target/demo-0.0.1-SNAPSHOT.jar
+" then simply cd to attach debugger
 
 set encoding=utf-8
 set nobackup
@@ -211,3 +240,22 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" See: https://github.com/dansomething/coc-java-debug
+function! JavaStartDebugCallback(err, port)
+	execute "cexpr! 'Java debug started on port: " . a:port . "'"
+	call vimspector#LaunchWithSettings({ "configuration": "Java Attach", "AdapterPort": a:port })
+endfunction
+
+function JavaRunDebugMode()
+	let l:class_name = expand('%:t:r')
+	execute 'AsyncRun -pos=tab -mode=term -name=' . l:class_name . ' -cwd=' . getcwd() . ' javac -g ' . l:class_name .'.java && java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=y ' . l:class_name
+	tabp
+endfunction
+
+function JavaStartDebug()
+	call CocActionAsync('runCommand', 'vscode.java.startDebugSession', function('JavaStartDebugCallback'))
+endfunction
+
+command -nargs=0 JavaRunDebugMode call JavaRunDebugMode()
+command -nargs=0 JavaStartDebug call JavaStartDebug()
