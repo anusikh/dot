@@ -88,7 +88,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'puremourning/vimspector'
 Plug 'tpope/vim-commentary'
-Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
