@@ -78,10 +78,11 @@ set updatetime=300
 set signcolumn=yes
 set autoindent expandtab tabstop=2 shiftwidth=2
 set clipboard=unnamed
+set nocompatible
+set backspace=indent,eol,start
 
 call plug#begin()
 
-Plug 'tpope/vim-sensible'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
