@@ -80,6 +80,7 @@ set autoindent expandtab tabstop=2 shiftwidth=2
 set clipboard=unnamed
 set nocompatible
 set backspace=indent,eol,start
+set laststatus=2
 
 call plug#begin()
 
