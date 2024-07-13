@@ -4,6 +4,8 @@
 " install lang servers -> :CocInstall coc-java coc-json coc-tsserver coc-rust-analyzer coc-java-debug
 " install debuggers -> :VimspectorInstall CodeLLDB
 " for quickfix: open rg search, press tab on the item you want to add to quickfix and then press enter
+" for commenting: ctrl+v, select lines, shift+i+<comment symbol>
+" for un-commenting: ctrl+v, select lines (use arrow keys to move cursor if reqd), d
  
 " for java lombok support add this in coc config
 " {
@@ -89,7 +91,6 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'puremourning/vimspector'
-Plug 'tpope/vim-commentary'
 
 call plug#end()
 
