@@ -2,7 +2,6 @@
 
 #### setup:
 - clone repo in ~/.config/nvim
-- setup vim plug (package manager), source and :PlugInstall
 - use :Mason and install the following:
     - `rust-analyzer`
     - `tsserver`
