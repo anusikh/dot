@@ -1,15 +1,6 @@
 local keyset = vim.keymap.set
 
 return {
-  {
-    "preservim/nerdtree",
-    config = function()
-      keyset('n', '<leader>n', ':NERDTreeFocus<CR>', { noremap = true })
-      keyset('n', '<C-t>', ':NERDTreeToggle<CR>', { noremap = true })
-      keyset('n', '<C-n>', ':NERDTree<CR>', { noremap = true })
-      keyset('n', '<C-f>', ':NERDTreeFind<CR>', { noremap = true })
-    end
-  },
   "nvim-lua/plenary.nvim",
   {
     "nvim-telescope/telescope.nvim",
@@ -19,13 +10,6 @@ return {
       keyset('n', '<C-r>', builtin.live_grep, {})
       keyset('n', '<leader>fb', builtin.buffers, {})
       keyset('n', '<leader>fh', builtin.help_tags, {})
-    end
-  },
-  {
-    'echasnovski/mini.comment',
-    version = '*',
-    config = function()
-      require('mini.comment').setup()
     end
   },
   {
