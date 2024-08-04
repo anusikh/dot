@@ -12,12 +12,6 @@ return {
       keyset('n', '<leader>fh', builtin.help_tags, {})
     end
   },
-  {
-    "folke/trouble.nvim",
-    config = function()
-      require('trouble').setup()
-    end
-  },
   "mfussenegger/nvim-dap",
   "williamboman/mason.nvim",
   "neovim/nvim-lspconfig",

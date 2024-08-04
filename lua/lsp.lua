@@ -29,6 +29,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- show diagnostics in telescope
+vim.api.nvim_set_keymap('n', '<C-d>', '<cmd>Telescope diagnostics<CR>', { noremap = true, silent = true })
+
 -- Set up nvim-cmp. (referred from official README)
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
