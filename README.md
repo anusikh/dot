@@ -10,6 +10,7 @@
     - `codelldb` 
     - `java-debug-adapter`
     - `java-test`
+    - `kotlin-language-server`
 - then go to java.lua, and change config_linux to config_mac or vice-versa depending on OS
 
 #### notes:
