@@ -48,7 +48,7 @@ cmp.setup({
 
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local servers = { 'lua_ls', 'tsserver', 'rust_analyzer', 'kotlin_language_server' }
+local servers = { 'lua_ls', 'tsserver', 'rust_analyzer', 'kotlin_language_server', 'clangd' }
 for _, lsp in ipairs(servers) do
   require("lspconfig")[lsp].setup {
     capabilities = capabilities,
