@@ -43,6 +43,7 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'supermaven' }
   })
 })
 
@@ -50,7 +51,7 @@ cmp.setup({
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local servers = { 'lua_ls', 'tsserver', 'rust_analyzer', 'kotlin_language_server', 'clangd', 'pyright' }
 require("mason-lspconfig").setup {
-    ensure_installed = servers,
+  ensure_installed = servers,
 }
 for _, lsp in ipairs(servers) do
   require("lspconfig")[lsp].setup {
