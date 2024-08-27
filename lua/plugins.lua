@@ -15,6 +15,7 @@ return {
   "mfussenegger/nvim-dap",
   "williamboman/mason.nvim",
   "neovim/nvim-lspconfig",
+  "williamboman/mason-lspconfig",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/nvim-cmp",
   "mfussenegger/nvim-jdtls",

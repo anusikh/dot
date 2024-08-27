@@ -12,9 +12,18 @@ set nocompatible
 set backspace=indent,eol,start
 set laststatus=2
 
+let g:coc_global_extensions = [
+\ 'coc-java',
+\ 'coc-json',
+\ 'coc-tsserver',
+\ 'coc-rust-analyzer',
+\ 'coc-java-debug',
+\ 'coc-pyright',
+\ ]
+
 call plug#begin()
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }, 'branch': 'release' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'puremourning/vimspector'
