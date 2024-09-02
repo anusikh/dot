@@ -2,6 +2,7 @@
 
 #### nvim setup:
 - clone repo in ~/.config/nvim
+- install `java-debug-adapter`, `java-test` from mason for debugging capabilities
 - go to java.lua, and change config_linux to config_mac or vice-versa depending on OS
 
 #### notes:
