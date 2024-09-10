@@ -11,6 +11,7 @@ set clipboard=unnamed
 set nocompatible
 set backspace=indent,eol,start
 set laststatus=2
+set directory^=/tmp/
 
 let g:coc_global_extensions = [
 \ 'coc-java',
