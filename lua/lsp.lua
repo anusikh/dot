@@ -49,7 +49,7 @@ cmp.setup({
 
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local servers = { 'jdtls', 'lua_ls', 'tsserver', 'rust_analyzer', 'kotlin_language_server', 'clangd', 'pyright' }
+local servers = { 'jdtls', 'lua_ls', 'ts_ls', 'rust_analyzer', 'kotlin_language_server', 'clangd', 'pyright' }
 
 require("mason-lspconfig").setup {
   ensure_installed = servers,
