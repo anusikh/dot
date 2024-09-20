@@ -12,12 +12,12 @@ return {
       keyset('n', '<leader>fh', builtin.help_tags, {})
     end
   },
-  {
-      "supermaven-inc/supermaven-nvim",
-      config = function()
-        require("supermaven-nvim").setup({})
-      end,
-  },
+  -- {
+  --     "supermaven-inc/supermaven-nvim",
+  --     config = function()
+  --       require("supermaven-nvim").setup({})
+  --     end,
+  -- },
   "mfussenegger/nvim-dap",
   "williamboman/mason.nvim",
   "neovim/nvim-lspconfig",

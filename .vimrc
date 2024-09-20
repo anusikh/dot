@@ -28,8 +28,16 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }, 'branch': 'release' 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'puremourning/vimspector'
+Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
+
+" NERDTree keymaps
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " Vimspector keymaps (for .vimspector.json examples, refer vimpsector repo)
 nnoremap <silent> cd :call vimspector#Launch()<CR>
