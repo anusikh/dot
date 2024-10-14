@@ -12,6 +12,13 @@ return {
       keyset('n', '<leader>fh', builtin.help_tags, {})
     end
   },
+  {
+    "preservim/nerdtree",
+    config = function()
+      keyset('n', '<C-t>', ':NERDTreeToggle<CR>', {})
+      keyset('n', '<C-f>', ':NERDTreeFind<CR>', {})
+    end
+  },
   -- {
   --     "supermaven-inc/supermaven-nvim",
   --     config = function()
