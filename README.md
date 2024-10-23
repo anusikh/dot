@@ -32,7 +32,7 @@
 - for java lombok support and kotlin language server add this in coc config
 <details>
 <summary> expand </summary>
-```
+<code>
 {
   "java.jdt.ls.vmargs": "-javaagent:/home/anusikh/Downloads/lombok-1.18.34.jar",
   "java.jdt.ls.lombokSupport.enabled": true,
@@ -47,14 +47,14 @@
     }
   }
 }
-```
+</code>
 </details>
 	
 #### debugger support
 - a sample .vimspector.json file for rust debugging
 <details>
 <summary> expand </summary>
-```
+<code>
 {
   "$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json",
   "adapters": {
@@ -79,13 +79,13 @@
     }
   }
 }
-```
+</code>
 </details>
 
 - a sample .vimspector.json file for java debugging
 <details>
 <summary> expand </summary>
-```
+<code>
 {
   "adapters": {
     "java-debug-server": {
@@ -111,7 +111,7 @@
     }
   }
 }
-```
+</code>
 </details>
 - first run the jar of a java application with command: java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 ./target/demo-0.0.1-SNAPSHOT.jar
 then simply cd to attach debugger
