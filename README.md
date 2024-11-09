@@ -17,7 +17,6 @@
 - clone repo and run `ln -s ~/.config/nvim/.vimrc ~/.vimrc`
 - pre-req: vim-plug, ripgrep
 - source and run :PlugInstall to install all plugins
-- install debuggers -> :VimspectorInstall CodeLLDB
 - for quickfix: open rg search, press tab on the item you want to add to quickfix and then press enter
 - for commenting: ctrl+v, select lines, shift+i+<comment symbol>
 - for un-commenting: ctrl+v, select lines (use arrow keys to move cursor if reqd), d
