@@ -21,7 +21,6 @@
 - for quickfix: open rg search, press tab on the item you want to add to quickfix and then press enter
 - for commenting: ctrl+v, select lines, shift+i+<comment symbol>
 - for un-commenting: ctrl+v, select lines (use arrow keys to move cursor if reqd), d
-- for filetree use :Vexplore
 - for java lombok support and kotlin language server add this in coc config
 <details>
 <summary> expand </summary>
@@ -37,70 +36,6 @@
       "filetypes": [
         "kotlin"
       ]
-    }
-  }
-}
-</code>
-</details>
-	
-#### debugger support
-- a sample .vimspector.json file for rust debugging
-<details>
-<summary> expand </summary>
-<code>
-{
-  "$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json",
-  "adapters": {
-    "CodeLLDB-localbuild": {
-      "extends": "CodeLLDB",
-      "command": [
-        "$HOME/Development/vimspector/CodeLLDB/build/adapter/codelldb",
-        "--port",
-        "${unusedLocalPort}"
-      ]
-    }
-  },
-  "configurations": {
-    "jvem -- current": {
-      "adapter": "CodeLLDB",
-      "configuration": {
-        "request": "launch",
-        "program": "cargo",
-	    "args": ["run", "--", "current"],
-        "expressions": "native"
-      }
-    }
-  }
-}
-</code>
-</details>
-
-- a sample .vimspector.json file for java debugging
-<details>
-<summary> expand </summary>
-<code>
-{
-  "adapters": {
-    "java-debug-server": {
-      "name": "vscode-java",
-      "port": "${AdapterPort}"
-    }
-  },
-  "configurations": {
-    "Java Attach": {
-      "default": true,
-      "adapter": "java-debug-server",
-      "configuration": {
-        "request": "attach",
-        "host": "127.0.0.1",
-        "port": "5005"
-      },
-      "breakpoints": {
-        "exception": {
-          "caught": "N",
-          "uncaught": "N"
-        }
-      }
     }
   }
 }
