@@ -19,12 +19,6 @@ return {
       keyset('n', '<C-f>', ':NERDTreeFind<CR>', {})
     end
   },
-  -- {
-  --     "supermaven-inc/supermaven-nvim",
-  --     config = function()
-  --       require("supermaven-nvim").setup({})
-  --     end,
-  -- },
   "mfussenegger/nvim-dap",
   "williamboman/mason.nvim",
   "neovim/nvim-lspconfig",

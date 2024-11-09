@@ -18,7 +18,6 @@ let g:coc_global_extensions = [
 \ 'coc-json',
 \ 'coc-tsserver',
 \ 'coc-rust-analyzer',
-\ 'coc-java-debug',
 \ 'coc-pyright',
 \ ]
 
@@ -27,7 +26,6 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }, 'branch': 'release' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'puremourning/vimspector'
 Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
 
@@ -39,11 +37,6 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
-" Vimspector keymaps (for .vimspector.json examples, refer vimpsector repo)
-nnoremap <silent> cd :call vimspector#Launch()<CR>
-nnoremap <silent> t :call vimspector#ToggleBreakpoint()<CR>
-nnoremap <silent> sa :VimspectorBreakpoints<CR>
-nnoremap <silent> r :VimspectorReset<CR>
 " FZF and Rg keymaps
 nnoremap <silent> <C-p> :FZF<CR>
 nnoremap <silent> <C-r> :Rg<CR>
@@ -136,22 +129,3 @@ nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-" See: https://github.com/dansomething/coc-java-debug
-function! JavaStartDebugCallback(err, port)
-	execute "cexpr! 'Java debug started on port: " . a:port . "'"
-	call vimspector#LaunchWithSettings({ "configuration": "Java Attach", "AdapterPort": a:port })
-endfunction
-
-function JavaRunDebugMode()
-	let l:class_name = expand('%:t:r')
-	execute 'AsyncRun -pos=tab -mode=term -name=' . l:class_name . ' -cwd=' . getcwd() . ' javac -g ' . l:class_name .'.java && java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=y ' . l:class_name
-	tabp
-endfunction
-
-function JavaStartDebug()
-	call CocActionAsync('runCommand', 'vscode.java.startDebugSession', function('JavaStartDebugCallback'))
-endfunction
-
-command -nargs=0 JavaRunDebugMode call JavaRunDebugMode()
-command -nargs=0 JavaStartDebug call JavaStartDebug()

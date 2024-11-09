@@ -28,7 +28,7 @@ local config = {
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
     '-jar', vim.env.HOME .. '/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar',
-    '-configuration', vim.env.HOME .. '/.local/share/nvim/mason/packages/jdtls/config_linux',
+    '-configuration', vim.env.HOME .. '/.local/share/nvim/mason/packages/jdtls/config_mac_arm',
     '-data', workspace_dir
   },
 
