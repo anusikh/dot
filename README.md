@@ -6,8 +6,6 @@
 - go to java.lua, and change config_linux to config_mac or vice-versa depending on OS
 
 #### notes:
-- lsp (ts, js, rust) handled by `mason`, `mason-lspconfig`, `nvim-lspconfig` and `nvim-cmp`
-- lsp (java) handled by `nvim-jdtls`
 - ftplugin is a special folder that store fileType based config, lsp should have single file mode for this to work
 - find and replace in current file: `:%s/<bef>/<after>`
 
@@ -17,13 +15,9 @@
 - clone repo and run `ln -s ~/.config/nvim/.vimrc ~/.vimrc`
 - pre-req: vim-plug, ripgrep
 - source and run :PlugInstall to install all plugins
-- for quickfix: open rg search, press tab on the item you want to add to quickfix and then press enter
-- for commenting: ctrl+v, select lines, shift+i+<comment symbol>
-- for un-commenting: ctrl+v, select lines (use arrow keys to move cursor if reqd), d
 - for java lombok support and kotlin language server add this in coc config
-<details>
-<summary> expand </summary>
-<code>
+
+```json
 {
   "java.jdt.ls.vmargs": "-javaagent:/home/anusikh/Downloads/lombok-1.18.34.jar",
   "java.jdt.ls.lombokSupport.enabled": true,
@@ -38,8 +32,7 @@
     }
   }
 }
-</code>
-</details>
+```
 
 - first run the jar of a java application with command: java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 ./target/demo-0.0.1-SNAPSHOT.jar
 then simply cd to attach debugger
