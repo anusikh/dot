@@ -35,7 +35,7 @@ call plug#end()
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <C-i> :NERDTreeFind<CR>
 
 " FZF and Rg keymaps
 nnoremap <silent> <C-p> :FZF<CR>

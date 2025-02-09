@@ -16,7 +16,7 @@ return {
     "preservim/nerdtree",
     config = function()
       keyset('n', '<C-t>', ':NERDTreeToggle<CR>', {})
-      keyset('n', '<C-f>', ':NERDTreeFind<CR>', {})
+      keyset('n', '<C-i>', ':NERDTreeFind<CR>', {})
     end
   },
   "mfussenegger/nvim-dap",
