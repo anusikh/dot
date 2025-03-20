@@ -12,6 +12,7 @@ set nocompatible
 set backspace=indent,eol,start
 set laststatus=2
 set directory^=/tmp/
+" for windows: set directory^=~/AppData/Local/Temp 
 
 let g:coc_global_extensions = [
 \ 'coc-java',
@@ -28,6 +29,8 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }, 'branch': 'release' 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
+
+" remove it for windows, else fzf doesnt work properly
 Plug 'vim-airline/vim-airline'
 
 call plug#end()
