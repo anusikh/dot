@@ -30,9 +30,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 
-" remove it for windows, else fzf doesnt work properly
-Plug 'vim-airline/vim-airline'
-
 call plug#end()
 
 " NERDTree keymaps
