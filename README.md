@@ -1,5 +1,11 @@
 ### neovim configuration
 
+#### install the following:
+- nvim
+- vim
+- lazygit
+- tmux
+
 #### nvim setup:
 - clone repo in ~/.config/nvim
 - install `java-debug-adapter`, `java-test` from mason for debugging capabilities
