@@ -42,7 +42,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-i> :NERDTreeFind<CR>
 
 " FZF and Rg keymaps
-
+nnoremap <silent> <C-p> :FZF<CR>
 nnoremap <silent> <C-r> :Rg<CR>
 " COC keymaps (copied from coc.nvim README.md)
 inoremap <silent><expr> <TAB>
