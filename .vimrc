@@ -1,4 +1,6 @@
 set encoding=utf-8
+
+
 set nobackup
 set nowritebackup
 set number
@@ -29,6 +31,7 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }, 'branch': 'release' 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -39,7 +42,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-i> :NERDTreeFind<CR>
 
 " FZF and Rg keymaps
-nnoremap <silent> <C-p> :FZF<CR>
+
 nnoremap <silent> <C-r> :Rg<CR>
 " COC keymaps (copied from coc.nvim README.md)
 inoremap <silent><expr> <TAB>
