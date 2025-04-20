@@ -1,6 +1,5 @@
 set encoding=utf-8
 
-
 set nobackup
 set nowritebackup
 set number
@@ -32,6 +31,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 Plug 'github/copilot.vim'
+Plug 'puremourning/vimspector'
 
 call plug#end()
 
