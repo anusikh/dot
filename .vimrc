@@ -21,7 +21,8 @@ let g:coc_global_extensions = [
 \ 'coc-tsserver',
 \ 'coc-rust-analyzer',
 \ 'coc-pyright',
-\ 'coc-go'
+\ 'coc-go',
+\ 'coc-clangd',
 \ ]
 
 call plug#begin()
