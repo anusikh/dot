@@ -5,7 +5,7 @@
 - vim
 - lazygit
 - tmux
-- vscode
+- vscode/intellij (language specific)
 
 #### nvim setup:
 - clone repo in ~/.config/nvim
