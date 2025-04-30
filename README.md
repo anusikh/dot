@@ -1,11 +1,8 @@
 ### neovim configuration
 
 #### install the following:
-- nvim
-- vim
-- lazygit
-- tmux
-- vscode/intellij (language specific)
+- terminal: vim, neovim, lazygit, tmux
+- ide: vscode, intellij (language specific)
 
 #### nvim setup:
 - clone repo in ~/.config/nvim
