@@ -39,6 +39,7 @@
 ```
 
 - first run the jar of a java application with below command and attach the debugger
+
 ```java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 ./target/demo-0.0.1-SNAPSHOT.jar```
 
 
