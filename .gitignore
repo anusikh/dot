@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+!i3/
+!i3/**
+
+!nvim/
+!nvim/**
+
+!.vimrc
