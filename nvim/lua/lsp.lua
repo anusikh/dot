@@ -53,14 +53,13 @@ local servers = { 'jdtls', 'lua_ls', 'ts_ls', 'rust_analyzer', 'kotlin_language_
 
 require("mason-lspconfig").setup {
   ensure_installed = servers,
-}
-
-require("mason-lspconfig").setup_handlers {
-  function(server_name)
-    require("lspconfig")[server_name].setup {
-      capabilities = capabilities,
-    }
-  end,
+  handlers = {
+    function(server_name)
+      require("lspconfig")[server_name].setup {
+        capabilities = capabilities,
+      }
+    end,
+  },
 }
 
 
