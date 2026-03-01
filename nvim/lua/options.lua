@@ -1,5 +1,6 @@
 local vim = vim
 
+vim.g.gui_font_size = 8.5
 vim.opt.mouse = "a"
 vim.opt.autoindent = true
 vim.opt.expandtab = true
