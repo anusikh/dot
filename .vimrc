@@ -32,8 +32,7 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }, 'branch': 'release' 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
-Plug 'github/copilot.vim'
-Plug 'puremourning/vimspector'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
