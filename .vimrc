@@ -17,7 +17,6 @@ set directory^=/tmp/
 " for windows: set directory^=~/AppData/Local/Temp 
 
 let g:coc_global_extensions = [
-\ 'coc-java',
 \ 'coc-json',
 \ 'coc-tsserver',
 \ 'coc-rust-analyzer',
