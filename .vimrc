@@ -16,6 +16,33 @@ set laststatus=2
 set directory^=/tmp/
 " for windows: set directory^=~/AppData/Local/Temp 
 
+function! GitDiffHead()
+  " Capture the current file path relative to buffer
+  let l:filename = expand('%')
+  " Prevent running on unsaved/empty buffers
+  if empty(l:filename)
+    echo "No file name for current buffer."
+    return
+  endif
+
+  " Open vertical split, clear it, and read the HEAD version into it
+  execute 'vnew'
+  execute 'setlocal buftype=nofile bufhidden=wipe noswapfile'
+  execute 'read !git show HEAD:' . shellescape(l:filename)
+  " Remove top empty line created by read
+  1delete _
+  " Set filetype to match original file for syntax highlighting
+  let l:ft = getbufvar('#', '&filetype')
+  execute 'setlocal filetype=' . l:ft
+  " Turn on diff mode against the original window
+  diffthis
+  wincmd p
+  diffthis
+endfunction
+
+" Map <Leader>gd to trigger the Git diff split
+nnoremap <C-a> :call GitDiffHead()<CR>
+
 let g:coc_global_extensions = [
 \ 'coc-json',
 \ 'coc-tsserver',

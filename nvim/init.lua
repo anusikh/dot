@@ -29,6 +29,34 @@ vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 
+-- Function to view vertical diff against Git HEAD
+local function git_diff_head()
+  local file = vim.fn.expand('%')
+  if file == '' then
+    vim.notify("No file name for current buffer.", vim.log.levels.WARN)
+    return
+  end
+
+  local ft = vim.bo.filetype
+
+  -- Open a vertical split with a scratch buffer
+  vim.cmd('vnew')
+  vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile')
+  
+  -- Read contents of HEAD:<filename> into scratch buffer
+  vim.cmd('read !git show HEAD:' .. vim.fn.shellescape(file))
+  vim.cmd('1delete _') -- Remove leading empty line
+  vim.bo.filetype = ft
+
+  -- Enable diff mode on both windows
+  vim.cmd('diffthis')
+  vim.cmd('wincmd p')
+  vim.cmd('diffthis')
+end
+
+-- Keymap: <Leader>gd triggers the diff
+vim.keymap.set('n', '<C-a>', git_diff_head, { desc = 'Git diff against HEAD' })
+
 -- Plugins (from plugins.lua)
 local keyset = vim.keymap.set
 require("lazy").setup({
