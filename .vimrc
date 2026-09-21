@@ -2,6 +2,7 @@ set encoding=utf-8
 
 set nobackup
 set nowritebackup
+" set cursorline
 set number
 set re=2
 set mouse=a
@@ -61,6 +62,8 @@ Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 
 call plug#end()
+
+syntax off
 
 " NERDTree keymaps
 nnoremap <leader>n :NERDTreeFocus<CR>
