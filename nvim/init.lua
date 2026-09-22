@@ -26,6 +26,7 @@ vim.opt.re = 2
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.updatetime = 300
+vim.cmd("syntax off")
 vim.opt.signcolumn = "yes"
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 
