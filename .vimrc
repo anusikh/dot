@@ -1,9 +1,9 @@
 set encoding=utf-8
 
+set path+=**
 set nobackup
 set nowritebackup
 " set cursorline
-set number
 set re=2
 set mouse=a
 set updatetime=300
@@ -16,6 +16,9 @@ set backspace=indent,eol,start
 set laststatus=2
 set directory^=/tmp/
 " for windows: set directory^=~/AppData/Local/Temp 
+set laststatus=2
+" format: [File Name] [Modified Flag] [Line/Total Lines, Column] [Percentage]
+set statusline=%F%m%r%h%w\ [%l/%L,%c]\ %p%%
 
 function! GitDiffHead()
   " Capture the current file path relative to buffer
@@ -59,7 +62,6 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }, 'branch': 'release' 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
-Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
