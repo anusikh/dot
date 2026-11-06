@@ -1,179 +1,151 @@
-local vim = vim
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- Bootstrap lazy.nvim
+-- ── lazy.nvim bootstrap ─────────────────────────────────────────────────────
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
+    "git", "clone", "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Options (from options.lua)
-vim.g.gui_font_size = 8.5
-vim.opt.mouse = "a"
-vim.opt.autoindent = true
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.re = 2
-vim.opt.backup = false
-vim.opt.writebackup = false
-vim.opt.updatetime = 300
-vim.opt.signcolumn = "yes"
-vim.api.nvim_set_option("clipboard", "unnamedplus")
+-- ── options ─────────────────────────────────────────────────────────────────
+local o = vim.opt
+o.mouse = "a"
+o.autoindent = true
+o.expandtab = true
+o.tabstop = 2
+o.shiftwidth = 2
+o.backup = false
+o.writebackup = false
+o.updatetime = 300
+o.signcolumn = "yes"
+o.clipboard = "unnamedplus"
+o.completeopt = { "menuone", "noselect", "popup" } 
+o.pumheight = 12
+o.splitright = true
+o.splitbelow = true
 
--- Function to view vertical diff against Git HEAD
-local function git_diff_head()
-  local file = vim.fn.expand('%')
-  if file == '' then
-    vim.notify("No file name for current buffer.", vim.log.levels.WARN)
-    return
-  end
+vim.diagnostic.config({ virtual_text = true, severity_sort = true })
 
-  local ft = vim.bo.filetype
-
-  -- Open a vertical split with a scratch buffer
-  vim.cmd('vnew')
-  vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile')
-  
-  -- Read contents of HEAD:<filename> into scratch buffer
-  vim.cmd('read !git show HEAD:' .. vim.fn.shellescape(file))
-  vim.cmd('1delete _') -- Remove leading empty line
-  vim.bo.filetype = ft
-
-  -- Enable diff mode on both windows
-  vim.cmd('diffthis')
-  vim.cmd('wincmd p')
-  vim.cmd('diffthis')
-end
-
--- Keymap: <Leader>gd triggers the diff
-vim.keymap.set('n', '<C-a>', git_diff_head, { desc = 'Git diff against HEAD' })
-
--- Plugins (from plugins.lua)
-local keyset = vim.keymap.set
-require("lazy").setup({
-  "nvim-lua/plenary.nvim",
-  {
-    "nvim-telescope/telescope.nvim",
-    config = function()
-      local builtin = require('telescope.builtin')
-      keyset('n', '<C-p>', builtin.find_files, {})
-      keyset('n', '<C-r>', builtin.live_grep, {})
-      keyset('n', '<leader>fb', builtin.buffers, {})
-      keyset('n', '<leader>fh', builtin.help_tags, {})
-    end
-  },
-  {
-    "preservim/nerdtree",
-    config = function()
-      keyset('n', '<C-t>', ':NERDTreeToggle<CR>', {})
-      keyset('n', '<C-i>', ':NERDTreeFind<CR>', {})
-    end
-  },
-  "williamboman/mason.nvim",
-  "neovim/nvim-lspconfig",
-  "williamboman/mason-lspconfig",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/nvim-cmp",
-  {
-    'dmtrKovalenko/fff.nvim',
-    build = function()
-      require("fff.download").download_or_build_binary()
-    end,
-    opts = {
-      debug = {
-        enabled = true,
-        show_scores = true,
-      },
-    },
-    lazy = false, -- the plugin lazy-initialises itself
-    keys = {
-      { "ff", function() require('fff').find_files() end, desc = 'FFFind files' },
-      { "fg", function() require('fff').live_grep() end, desc = 'LiFFFe grep' },
-      { "fz",
-        function() require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain' } } }) end,
-        desc = 'Live fffuzy grep',
-      },
-      { "fc",
-        function() require('fff').live_grep({ query = vim.fn.expand("<cword>") }) end,
-        desc = 'Search current word',
-      },
-    },
+local caps = vim.lsp.protocol.make_client_capabilities()
+caps.textDocument.completion.completionItem.snippetSupport = true
+caps.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+caps.textDocument.completion.completionItem.resolveSupport = {
+  properties = { "documentation", "detail", "additionalTextEdits" }, -- auto-imports on accept
 }
+vim.lsp.config("*", { capabilities = caps })
+
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      workspace = {
+        checkThirdParty = false,
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      diagnostics = { globals = { "vim" } },
+      telemetry = { enable = false },
+    },
+  },
 })
 
--- LSP and Plugin Configuration (from lsp.lua)
--- for mason
-if pcall(require, 'mason') then require('mason').setup() end
+-- Install these with your package manager (pacman/npm/cargo/brew), not mason:
+--   lua-language-server, typescript-language-server, rust-analyzer,
+--   gopls, clangd, pyright
+vim.lsp.enable({ "lua_ls", "ts_ls", "rust_analyzer", "gopls", "clangd", "pyright" })
 
--- Set up nvim-cmp
-local has_cmp, cmp = pcall(require, 'cmp')
-if has_cmp then
-  cmp.setup({
-    mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'supermaven' }
-    })
-  })
-end
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("user_lsp", { clear = true }),
   callback = function(ev)
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>a', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
-      vim.lsp.buf.format { async = true }
-    end, opts)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client and client:supports_method("textDocument/completion") then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+    vim.keymap.set("n", "<leader>f", function()
+      vim.lsp.buf.format({ async = true, bufnr = ev.buf })
+    end, { buffer = ev.buf, desc = "Format buffer" })
   end,
 })
 
--- show diagnostics in telescope
-vim.api.nvim_set_keymap('n', '<C-d>', '<cmd>Telescope diagnostics<CR>', { noremap = true, silent = true })
+vim.keymap.set("i", "<C-Space>", function() vim.lsp.completion.get() end, { desc = "LSP completion" })
 
--- Set up lspconfig
-local has_cmp_lsp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-local capabilities = has_cmp_lsp and cmp_nvim_lsp.default_capabilities() or nil
-local servers = { 'lua_ls', 'ts_ls', 'rust_analyzer', 'gopls', 'clangd', 'pyright' }
+vim.keymap.set("n", "<leader>fb", function()
+  vim.ui.select(vim.fn.getbufinfo({ buflisted = 1 }), {
+    prompt = "Buffers",
+    format_item = function(b)
+      local name = b.name == "" and "[No Name]" or vim.fn.fnamemodify(b.name, ":~:.")
+      return (b.changed == 1 and "+ " or "  ") .. name .. ":" .. b.lnum
+    end,
+  }, function(choice)
+    if choice then vim.api.nvim_set_current_buf(choice.bufnr) end
+  end)
+end, { desc = "Switch buffer" })
 
-local has_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
-if has_mason_lspconfig then
-  mason_lspconfig.setup {
-    ensure_installed = servers,
-    handlers = {
-      function(server_name)
-        require("lspconfig")[server_name].setup {
-          capabilities = capabilities,
-        }
-      end,
-    },
-  }
+vim.keymap.set("n", "<leader>fh", function()
+  vim.ui.select(vim.fn.getcompletion("", "help"), { prompt = "Help" }, function(choice)
+    if choice then vim.cmd("help " .. choice) end
+  end)
+end, { desc = "Help tags" })
+
+vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Diagnostics to loclist" })
+
+local function git_diff_head()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file == "" then
+    vim.notify("Buffer has no file name.", vim.log.levels.WARN)
+    return
+  end
+  local rel = vim.fn.systemlist({ "git", "ls-files", "--full-name", "--", file })[1]
+  if not rel or rel == "" then
+    vim.notify("File is not tracked by git.", vim.log.levels.WARN)
+    return
+  end
+  local ft = vim.bo.filetype
+  local lines = vim.fn.systemlist({ "git", "show", "HEAD:" .. rel })
+  if vim.v.shell_error ~= 0 then
+    vim.notify("git show failed for HEAD:" .. rel, vim.log.levels.ERROR)
+    return
+  end
+
+  vim.cmd("botright vertical new")
+  vim.cmd("setlocal buftype=nofile bufhidden=wipe noswapfile")
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+  vim.bo.filetype = ft
+
+  vim.cmd("diffthis")
+  vim.cmd("wincmd p")
+  vim.cmd("diffthis")
 end
+
+vim.keymap.set("n", "<C-a>", git_diff_head, { desc = "Diff buffer against HEAD" })
+
+require("lazy").setup({
+  { "neovim/nvim-lspconfig", lazy = false },
+
+  {
+    "dmtrKovalenko/fff",
+    lazy = false, -- the plugin initialises itself
+    build = function()
+      require("fff.download").download_or_build_binary()
+    end,
+    opts = { debug = { enabled = true, show_scores = true } },
+    keys = {
+      { "ff", function() require("fff").find_files() end, desc = "Find files" },
+      { "fg", function() require("fff").live_grep() end, desc = "Live grep" },
+      {
+        "fz",
+        function() require("fff").live_grep({ grep = { modes = { "fuzzy", "plain" } } }) end,
+        desc = "Fuzzy grep",
+      },
+      {
+        "fw",
+        function() require("fff").live_grep_under_cursor() end,
+        mode = { "n", "x" },
+        desc = "Search word / selection",
+      },
+    },
+  },
+}, { install = { missing = true } })

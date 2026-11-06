@@ -44,7 +44,6 @@ function! GitDiffHead()
   diffthis
 endfunction
 
-" Map <Leader>gd to trigger the Git diff split
 nnoremap <C-a> :call GitDiffHead()<CR>
 
 let g:coc_global_extensions = [
@@ -67,16 +66,13 @@ call plug#end()
 
 syntax off
 
-" NERDTree keymaps
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-i> :NERDTreeFind<CR>
 
-" FZF and Rg keymaps
 nnoremap <silent> <C-p> :FZF<CR>
 nnoremap <silent> <C-r> :Rg<CR>
-" COC keymaps (copied from coc.nvim README.md)
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
