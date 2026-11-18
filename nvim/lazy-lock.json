@@ -1,5 +1,5 @@
 {
-  "fff": { "branch": "main", "commit": "b35b96ad065aea26aafb73eac69fd4866f173b76" },
+  "fff": { "branch": "main", "commit": "924cb4d758f09bb54654555b0c9440bacd1f97f0" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
-  "nvim-lspconfig": { "branch": "master", "commit": "d5c7e7bcc15bccc01bf1601a03473e10de2f0f7e" }
+  "nvim-lspconfig": { "branch": "master", "commit": "6e72b89d499455611f09f46d13ee9f79325406e5" }
 }
